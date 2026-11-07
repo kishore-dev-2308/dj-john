@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ John | Live &amp; Local - High-Voltage Sound for Every Celebration</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#FFE500',
+              yellowDark: '#D4BF00',
+              pink: '#FF2E93',
+              pinkDark: '#D6006B',
+              dark: '#080910',
+              card: '#10121C',
+              cardBorder: 'rgba(255, 255, 255, 0.08)',
+              cyan: '#00F0FF'
+            }
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          boxShadow: {
+            'neon-yellow': '0 0 25px rgba(255, 229, 0, 0.45)',
+            'neon-pink': '0 0 25px rgba(255, 46, 147, 0.45)',
+            'glow-cyan': '0 0 20px rgba(0, 240, 255, 0.35)'
+          },
+          animation: {
+            'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 12s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+    body {
+      background-color: #07080F;
+      color: #F3F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+    img, video {
+      max-width: 100%;
+      height: auto;
+    }
+    .font-syne { font-family: 'Syne', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .text-glow-yellow {
+      text-shadow: 0 0 14px rgba(255, 229, 0, 0.8), 0 0 30px rgba(255, 229, 0, 0.4);
+    }
+    .text-glow-pink {
+      text-shadow: 0 0 14px rgba(255, 46, 147, 0.8), 0 0 30px rgba(255, 46, 147, 0.4);
+    }
+    
+    .glass-card {
+      background: rgba(16, 18, 28, 0.8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(255, 229, 0, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px -10px rgba(255, 229, 0, 0.25);
+    }
+    .glass-nav {
+      background: rgba(8, 9, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    /* Floating Ambient Orbs */
+    @keyframes floatOrb1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, -35px) scale(1.12); }
+    }
+    @keyframes floatOrb2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 25px) scale(1.08); }
+    }
+    .animate-float-1 { animation: floatOrb1 9s ease-in-out infinite; }
+    .animate-float-2 { animation: floatOrb2 11s ease-in-out infinite; }
+
+    /* Infinite Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+    }
+    .marquee-track {
+      display: flex;
+      flex-shrink: 0;
+      animation: marqueeScroll 25s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* Range inputs */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #1f2333;
+      height: 6px;
+      border-radius: 9999px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #FFE500;
+      box-shadow: 0 0 12px #FFE500;
+      cursor: pointer;
+    }
+
+    /* Equalizer Bar Animation */
+    @keyframes eqBar {
+      0%, 100% { height: 18%; }
+      50% { height: 95%; }
+    }
+    .animate-eq-1 { animation: eqBar 0.85s ease-in-out infinite; }
+    .animate-eq-2 { animation: eqBar 0.65s ease-in-out infinite 0.15s; }
+    .animate-eq-3 { animation: eqBar 0.95s ease-in-out infinite 0.3s; }
+    .animate-eq-4 { animation: eqBar 0.75s ease-in-out infinite 0.45s; }
+
+    /* Mobile Quick Action Bar */
+    .mobile-action-bar {
+      background: rgba(8, 9, 16, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-yellow selection:text-black pb-20 md:pb-0 overflow-x-hidden max-w-full w-full">
+
+  <!-- ==================== STICKY NAVIGATION ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand Identity Logo matching visiting card -->
+        <a href="#hero" class="flex items-center gap-2 sm:gap-3 group shrink-0">
+          <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-brand-yellow via-yellow-400 to-brand-pink p-0.5 flex items-center justify-center shadow-neon-yellow group-hover:scale-105 transition-transform duration-300">
+            <div class="w-full h-full bg-brand-dark rounded-[10px] flex items-center justify-center">
+              <i class="fa-solid fa-headphones-simple text-brand-yellow text-base sm:text-lg"></i>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <span class="font-syne text-lg sm:text-2xl font-black text-brand-yellow tracking-tight text-glow-yellow">DJ JOHN</span>
+            </div>
+            <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-brand-pink flex items-center gap-1 font-mono whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-pink animate-ping"></span> Live &amp; Local
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold tracking-wide text-gray-300">
+          <a href="#services" class="hover:text-brand-yellow transition-colors whitespace-nowrap">Services</a>
+          <a href="#gallery" class="hover:text-brand-yellow transition-colors whitespace-nowrap flex items-center gap-1.5 text-brand-yellow">
+            <i class="fa-solid fa-photo-film text-brand-pink text-xs"></i> Live Gallery
+          </a>
+          <a href="#calculator" class="hover:text-brand-yellow transition-colors whitespace-nowrap">Event Request</a>
+          <a href="#about" class="hover:text-brand-yellow transition-colors whitespace-nowrap">About</a>
+          <a href="#contact" class="hover:text-brand-yellow transition-colors whitespace-nowrap">Contact</a>
+        </nav>
+
+        <!-- Right Side Quick Contact & CTAs -->
+        <div class="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
+          <a href="tel:+917358830098" class="whitespace-nowrap text-xs font-semibold text-gray-200 hover:text-white flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 hover:border-brand-yellow/40 hover:bg-white/5 transition">
+            <i class="fa-solid fa-phone text-brand-yellow"></i> +91 73588 30098
+          </a>
+          <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20am%20interested%20in%20booking%20you%20for%20an%20event!" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap btn-shimmer px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider bg-brand-yellow text-brand-dark hover:bg-yellow-300 transition shadow-neon-yellow flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+          </a>
+        </div>
+
+        <!-- Mobile Menu Hamburger & Quick WhatsApp Button -->
+        <div class="flex md:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+          <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20want%20to%20inquire%20about%20booking!" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2.5 py-1.5 bg-brand-yellow text-black font-bold text-xs rounded-lg flex items-center gap-1 shadow-neon-yellow">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+          </a>
+          <button id="menuBtn" class="p-2 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:text-brand-yellow" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars text-lg" id="menuIcon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-3 pb-6 border-t border-white/10 glass-card">
+      <div class="flex flex-col gap-2 font-semibold text-gray-300 text-sm">
+        <a href="#services" class="py-2 px-3 rounded-lg hover:bg-white/5 hover:text-brand-yellow mobile-link flex items-center gap-2">
+          <i class="fa-solid fa-compact-disc text-brand-yellow text-xs"></i> Wedding &amp; Party Services
+        </a>
+        <a href="#gallery" class="py-2 px-3 rounded-lg hover:bg-white/5 text-brand-yellow mobile-link flex items-center gap-2">
+          <i class="fa-solid fa-photo-film text-brand-pink text-xs"></i> Event Photos &amp; Video Reels
+        </a>
+        <a href="#calculator" class="py-2 px-3 rounded-lg hover:bg-white/5 hover:text-brand-yellow mobile-link flex items-center gap-2">
+          <i class="fa-solid fa-calendar-check text-brand-cyan text-xs"></i> Event Customizer &amp; WhatsApp Booking
+        </a>
+        <a href="#about" class="py-2 px-3 rounded-lg hover:bg-white/5 hover:text-brand-yellow mobile-link flex items-center gap-2">
+          <i class="fa-solid fa-headphones text-brand-yellow text-xs"></i> About DJ John
+        </a>
+        <a href="#contact" class="py-2 px-3 rounded-lg hover:bg-white/5 hover:text-brand-yellow mobile-link flex items-center gap-2">
+          <i class="fa-solid fa-address-book text-brand-yellow text-xs"></i> Direct Contacts
+        </a>
+      </div>
+      <div class="mt-3 pt-3 border-t border-white/10 flex flex-col gap-2">
+        <a href="tel:+917358830098" class="whitespace-nowrap text-center py-2 rounded-lg border border-white/10 text-xs font-semibold text-gray-200 hover:border-brand-yellow hover:text-brand-yellow transition">
+          <i class="fa-solid fa-phone text-brand-yellow mr-1.5"></i> Call: +91 73588 30098
+        </a>
+        <a href="tel:+916382178394" class="whitespace-nowrap text-center py-2 rounded-lg border border-white/10 text-xs font-semibold text-gray-200 hover:border-brand-yellow hover:text-brand-yellow transition">
+          <i class="fa-solid fa-phone text-brand-yellow mr-1.5"></i> Call: +91 63821 78394
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="relative min-h-[85vh] pt-24 sm:pt-28 pb-14 sm:pb-16 flex items-center justify-center overflow-hidden">
+      <!-- Ambient Lighting Blobs -->
+      <div class="absolute -top-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-brand-yellow/15 rounded-full blur-[100px] sm:blur-[130px] pointer-events-none animate-float-1"></div>
+      <div class="absolute top-1/4 -right-32 w-80 sm:w-[32rem] h-80 sm:h-[32rem] bg-brand-pink/20 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none animate-float-2"></div>
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-36 sm:h-48 bg-brand-cyan/10 rounded-full blur-[90px] sm:blur-[110px] pointer-events-none"></div>
+
+      <!-- Backdrop Grid Mesh -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-70 pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+        
+        <!-- Live & Local Flash Badge (Responsive Wrapping) -->
+        <div class="inline-flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full glass-card border border-brand-yellow/30 text-brand-yellow text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-5 sm:mb-6 shadow-neon-yellow/30 animate-pulse-fast max-w-full text-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-yellow shrink-0"></span>
+          <span>LIVE &amp; LOCAL SPECIALIST</span>
+          <span class="hidden sm:inline text-white/40">|</span>
+          <span class="text-brand-pink block sm:inline">SETTING THE DANCE FLOOR ON FIRE</span>
+        </div>
+
+        <!-- Big Bold Title with Visual Treatment -->
+        <h1 class="font-syne text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none text-white mb-5 sm:mb-6 uppercase">
+          <span class="text-brand-yellow inline-block transition-transform hover:scale-105 duration-300 drop-shadow-[0_0_35px_rgba(255,229,0,0.6)]">DJ</span>
+          <span class="text-white relative mx-1 sm:mx-2">
+            JOHN
+            <span class="absolute -top-2 -right-4 sm:-top-5 sm:-right-8 text-[10px] sm:text-sm font-bold px-1.5 py-0.5 sm:px-2 rounded bg-brand-pink text-white font-sans tracking-normal shadow-neon-pink">PRO</span>
+          </span>
+        </h1>
+
+        <!-- Subtitle & Punchy Tagline -->
+        <p class="max-w-3xl mx-auto text-sm sm:text-lg md:text-xl font-medium text-gray-300 mb-6 sm:mb-8 leading-relaxed px-2">
+          Electrifying sound and seamless mixes for 
+          <span class="text-brand-yellow font-bold underline decoration-brand-yellow/50 underline-offset-4">Weddings</span>, 
+          <span class="text-brand-pink font-bold underline decoration-brand-pink/50 underline-offset-4">Birthdays</span>, &amp; 
+          <span class="text-brand-cyan font-bold underline decoration-brand-cyan/50 underline-offset-4">Mega Celebrations</span>.
+        </p>
+
+        <!-- Direct Contact Chips -->
+        <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mb-8 sm:mb-10 text-[11px] sm:text-xs max-w-full px-1">
+          <a href="mailto:djohn28@gmail.com" class="px-3 py-1.5 rounded-full glass-card hover:border-brand-yellow text-gray-300 hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope text-red-400"></i> <span class="truncate max-w-[150px] sm:max-w-none">djohn28@gmail.com</span>
+          </a>
+          <a href="https://wa.me/917358830098" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-3 py-1.5 rounded-full glass-card hover:border-brand-yellow text-gray-300 hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-emerald-400"></i> +91 73588 30098
+          </a>
+          <a href="tel:+916382178394" class="whitespace-nowrap px-3 py-1.5 rounded-full glass-card hover:border-brand-yellow text-gray-300 hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-solid fa-phone text-brand-yellow"></i> +91 63821 78394
+          </a>
+        </div>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-6 mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto px-2">
+          <a href="#calculator" class="w-full sm:w-auto px-5 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider bg-brand-yellow text-brand-dark hover:bg-yellow-300 transition-all shadow-neon-yellow flex items-center justify-center gap-2.5 transform hover:-translate-y-0.5 btn-shimmer">
+            <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i> Plan &amp; Request Event Booking
+          </a>
+          <a href="#gallery" class="w-full sm:w-auto px-5 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider glass-card border border-white/20 text-white hover:border-brand-pink hover:text-brand-pink transition-all shadow-lg flex items-center justify-center gap-2.5 transform hover:-translate-y-0.5">
+            <i class="fa-solid fa-photo-film text-brand-pink"></i> View Event Samples &amp; Videos
+          </a>
+        </div>
+
+        <!-- Soundwave Equalizer Dynamic Animation Bar -->
+        <div class="inline-flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-5 sm:py-2 rounded-full glass-card border border-white/10 shadow-inner max-w-full text-center">
+          <span class="text-[10px] sm:text-xs font-mono text-gray-400 font-semibold">DANCEFLOOR ENERGY:</span>
+          <div class="flex items-end gap-1 h-3.5 sm:h-4">
+            <span class="w-1 bg-brand-pink rounded-t animate-eq-1"></span>
+            <span class="w-1 bg-brand-yellow rounded-t animate-eq-2"></span>
+            <span class="w-1 bg-brand-cyan rounded-t animate-eq-3"></span>
+            <span class="w-1 bg-brand-yellow rounded-t animate-eq-4"></span>
+            <span class="w-1 bg-brand-pink rounded-t animate-eq-2"></span>
+            <span class="w-1 bg-brand-cyan rounded-t animate-eq-1"></span>
+            <span class="w-1 bg-brand-yellow rounded-t animate-eq-3"></span>
+          </div>
+          <span class="text-[10px] sm:text-xs font-mono text-brand-yellow font-bold ml-1">126 BPM</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== HIGH-ENERGY MUSIC GENRE TICKER ==================== -->
+    <div class="py-4 border-y border-white/10 bg-brand-dark/80 backdrop-blur-md overflow-hidden">
+      <div class="marquee-container">
+        <div class="marquee-track flex items-center gap-8 text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-gray-400">
+          <span class="text-brand-yellow flex items-center gap-2"><i class="fa-solid fa-bolt"></i> TAMIL KUTHU &amp; LOCAL VIBES</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-pink flex items-center gap-2"><i class="fa-solid fa-music"></i> BOLLYWOOD BLOCKBUSTERS</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-cyan flex items-center gap-2"><i class="fa-solid fa-compact-disc"></i> COMMERCIAL EDM &amp; HOUSE</span>
+          <span class="text-white/20">•</span>
+          <span class="text-amber-400 flex items-center gap-2"><i class="fa-solid fa-fire"></i> PUNJABI DHOL BEATS</span>
+          <span class="text-white/20">•</span>
+          <span class="text-purple-400 flex items-center gap-2"><i class="fa-solid fa-star"></i> CINEMATIC COUPLE ENTRIES</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-yellow flex items-center gap-2"><i class="fa-solid fa-sliders"></i> PRO JBL/RCF BASS REINFORCEMENT</span>
+          <span class="text-white/20">•</span>
+          
+          <span class="text-brand-yellow flex items-center gap-2"><i class="fa-solid fa-bolt"></i> TAMIL KUTHU &amp; LOCAL VIBES</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-pink flex items-center gap-2"><i class="fa-solid fa-music"></i> BOLLYWOOD BLOCKBUSTERS</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-cyan flex items-center gap-2"><i class="fa-solid fa-compact-disc"></i> COMMERCIAL EDM &amp; HOUSE</span>
+          <span class="text-white/20">•</span>
+          <span class="text-amber-400 flex items-center gap-2"><i class="fa-solid fa-fire"></i> PUNJABI DHOL BEATS</span>
+          <span class="text-white/20">•</span>
+          <span class="text-purple-400 flex items-center gap-2"><i class="fa-solid fa-star"></i> CINEMATIC COUPLE ENTRIES</span>
+          <span class="text-white/20">•</span>
+          <span class="text-brand-yellow flex items-center gap-2"><i class="fa-solid fa-sliders"></i> PRO JBL/RCF BASS REINFORCEMENT</span>
+          <span class="text-white/20">•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SERVICES & OCCASIONS ==================== -->
+    <section id="services" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-yellow uppercase tracking-widest mb-3 font-mono">
+            <i class="fa-solid fa-star"></i> Featured On Visiting Card
+          </div>
+          <h2 class="font-syne text-3xl sm:text-5xl font-black text-white">
+            Signature Event <span class="text-brand-pink">Specialties</span>
+          </h2>
+          <p class="text-gray-400 mt-4 text-base sm:text-lg">
+            High-grade sound setups, customizable playlists, and dynamic crowd interaction for every milestone moment.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1: Wedding Reception -->
+          <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group border border-white/10 hover:border-brand-pink/60">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-brand-pink/10 border border-brand-pink/30 flex items-center justify-center text-brand-pink text-2xl mb-6 group-hover:scale-110 transition-transform shadow-neon-pink/20">
+                <i class="fa-solid fa-ring"></i>
+              </div>
+              <span class="text-[11px] font-bold text-brand-pink uppercase tracking-widest font-mono">Occasion 01</span>
+              <h3 class="font-syne text-xl font-bold text-white mt-1 mb-3">Wedding Reception</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Cinematic couple entries, energetic regional beats, customized family dance sets, and seamless crowd engagement from start to midnight.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <span class="text-xs text-gray-300 font-mono">Tier: Premium</span>
+              <button onclick="prefillBooking('Wedding Reception')" class="text-xs font-bold text-brand-yellow hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Plan Event <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Birthdays -->
+          <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group border border-white/10 hover:border-brand-yellow/60">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-brand-yellow/10 border border-brand-yellow/30 flex items-center justify-center text-brand-yellow text-2xl mb-6 group-hover:scale-110 transition-transform shadow-neon-yellow/20">
+                <i class="fa-solid fa-cake-candles"></i>
+              </div>
+              <span class="text-[11px] font-bold text-brand-yellow uppercase tracking-widest font-mono">Occasion 02</span>
+              <h3 class="font-syne text-xl font-bold text-white mt-1 mb-3">Birthday Bashes</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                From 1st birthday celebrations to wild 18th, 21st, and 50th milestones. Cake-cutting fanfare drops, trending reels tracks, and heavy dance hits.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <span class="text-xs text-gray-300 font-mono">Tier: High Energy</span>
+              <button onclick="prefillBooking('Birthday Party')" class="text-xs font-bold text-brand-yellow hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Plan Event <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Parties -->
+          <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group border border-white/10 hover:border-brand-cyan/60">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/30 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 transition-transform shadow-glow-cyan">
+                <i class="fa-solid fa-champagne-glasses"></i>
+              </div>
+              <span class="text-[11px] font-bold text-brand-cyan uppercase tracking-widest font-mono">Occasion 03</span>
+              <h3 class="font-syne text-xl font-bold text-white mt-1 mb-3">Parties &amp; Club Gigs</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                EDM, commercial house, high-octane mashups, and live beatmatching tailored for youth fests, farmhouses, pool bashes, and nightclub sets.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <span class="text-xs text-gray-300 font-mono">Tier: Bass Heavy</span>
+              <button onclick="prefillBooking('Parties & Club Gigs')" class="text-xs font-bold text-brand-yellow hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Plan Event <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4: Celebrations -->
+          <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group border border-white/10 hover:border-purple-500/60">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-fire"></i>
+              </div>
+              <span class="text-[11px] font-bold text-purple-400 uppercase tracking-widest font-mono">Occasion 04</span>
+              <h3 class="font-syne text-xl font-bold text-white mt-1 mb-3">Celebrations</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Anniversaries, festival gatherings, corporate annual dinners, and family get-togethers. Balanced sound and broad genre selections.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <span class="text-xs text-gray-300 font-mono">Tier: All-Rounder</span>
+              <button onclick="prefillBooking('Celebrations & Corporate')" class="text-xs font-bold text-brand-yellow hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Plan Event <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== LIVE EVENT GALLERY & VIDEO REELS ==================== -->
+    <section id="gallery" class="py-16 sm:py-24 relative border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-yellow uppercase tracking-widest mb-2 font-mono">
+            <i class="fa-solid fa-photo-film text-brand-pink"></i> Live Event Highlights
+          </div>
+          <h2 class="font-syne text-3xl sm:text-5xl font-black text-white">
+            Event Photos &amp; <span class="text-brand-yellow text-glow-yellow">Video Reels</span>
+          </h2>
+          <p class="text-gray-400 mt-2 text-sm sm:text-base">
+            Authentic celebration energy captured live from weddings, birthdays, farmhouses, and club nights powered by DJ John.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 mb-8 sm:mb-10 pb-2">
+          <button onclick="setGalleryFilter('all')" data-filter="all" class="gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-brand-yellow text-brand-dark shadow-neon-yellow transition active:scale-95">
+            All Moments
+          </button>
+          <button onclick="setGalleryFilter('wedding')" data-filter="wedding" class="gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider glass-card text-gray-300 hover:text-white hover:border-white/20 transition active:scale-95">
+            💍 Weddings &amp; Sangeet
+          </button>
+          <button onclick="setGalleryFilter('parties')" data-filter="parties" class="gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider glass-card text-gray-300 hover:text-white hover:border-white/20 transition active:scale-95">
+            ⚡ Club &amp; Parties
+          </button>
+          <button onclick="setGalleryFilter('birthday')" data-filter="birthday" class="gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider glass-card text-gray-300 hover:text-white hover:border-white/20 transition active:scale-95">
+            🎂 Birthday Bashes
+          </button>
+          <button onclick="setGalleryFilter('video')" data-filter="video" class="gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider glass-card text-gray-300 hover:text-white hover:border-white/20 transition active:scale-95">
+            🎬 Live Video Reels
+          </button>
+        </div>
+
+        <!-- Dynamic Grid Container -->
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Rendered dynamically by gallery.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== INSTANT EVENT CUSTOMIZER & WHATSAPP GENERATOR (LIVE PREVIEW REMOVED) ==================== -->
+    <section id="calculator" class="py-16 sm:py-24 relative bg-black/40 border-t border-white/10">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header Text -->
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-yellow uppercase tracking-widest mb-3 font-mono">
+            <i class="fa-brands fa-whatsapp text-emerald-400"></i> Direct WhatsApp Booking Request
+          </div>
+          <h2 class="font-syne text-3xl sm:text-5xl font-black text-white mb-3">
+            Plan Your <span class="text-brand-yellow text-glow-yellow">Event Setup</span>
+          </h2>
+          <p class="text-gray-400 text-sm sm:text-base">
+            Select your occasion, audience size, and equipment add-ons to dispatch a pre-formatted booking inquiry directly to DJ John on WhatsApp.
+          </p>
+        </div>
+
+        <!-- Centered Booking Form Card -->
+        <div class="glass-card rounded-3xl p-4 sm:p-8 md:p-12 border border-white/10 shadow-2xl relative overflow-hidden">
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <form id="quoteForm" class="space-y-6 sm:space-y-7 relative z-10" onsubmit="event.preventDefault(); sendQuoteWhatsApp();">
+            
+            <!-- Event Type Selection -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2.5">
+                Select Occasion <span class="text-brand-pink">*</span>
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+                <label class="cursor-pointer">
+                  <input type="radio" name="eventType" value="Wedding Reception" class="peer sr-only" checked>
+                  <div class="p-2.5 sm:p-3.5 rounded-xl border border-white/10 peer-checked:border-brand-yellow peer-checked:bg-brand-yellow/10 text-center transition">
+                    <i class="fa-solid fa-ring text-base block mb-1 text-brand-pink"></i>
+                    <span class="text-xs font-bold text-gray-200">Wedding</span>
+                  </div>
+                </label>
+
+                <label class="cursor-pointer">
+                  <input type="radio" name="eventType" value="Birthday Party" class="peer sr-only">
+                  <div class="p-2.5 sm:p-3.5 rounded-xl border border-white/10 peer-checked:border-brand-yellow peer-checked:bg-brand-yellow/10 text-center transition">
+                    <i class="fa-solid fa-cake-candles text-base block mb-1 text-brand-yellow"></i>
+                    <span class="text-xs font-bold text-gray-200">Birthday</span>
+                  </div>
+                </label>
+
+                <label class="cursor-pointer">
+                  <input type="radio" name="eventType" value="Parties & Club Gigs" class="peer sr-only">
+                  <div class="p-2.5 sm:p-3.5 rounded-xl border border-white/10 peer-checked:border-brand-yellow peer-checked:bg-brand-yellow/10 text-center transition">
+                    <i class="fa-solid fa-champagne-glasses text-base block mb-1 text-brand-cyan"></i>
+                    <span class="text-xs font-bold text-gray-200">Party</span>
+                  </div>
+                </label>
+
+                <label class="cursor-pointer">
+                  <input type="radio" name="eventType" value="Celebrations & Corporate" class="peer sr-only">
+                  <div class="p-2.5 sm:p-3.5 rounded-xl border border-white/10 peer-checked:border-brand-yellow peer-checked:bg-brand-yellow/10 text-center transition">
+                    <i class="fa-solid fa-fire text-base block mb-1 text-purple-400"></i>
+                    <span class="text-xs font-bold text-gray-200">Celebration</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Sliders: Duration & Guests -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-1">
+              
+              <!-- Hours Slider -->
+              <div class="glass-card p-3.5 sm:p-4 rounded-xl border border-white/5">
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-xs font-bold text-gray-300 uppercase tracking-wider">Performance Duration</label>
+                  <span id="hoursDisplay" class="font-mono text-sm font-bold text-brand-yellow">4 Hours</span>
+                </div>
+                <input type="range" id="hoursInput" min="2" max="8" value="4" step="1" class="w-full accent-brand-yellow cursor-pointer" oninput="updateSliderDisplays()">
+                <div class="flex justify-between text-[10px] text-gray-400 mt-1.5 font-mono">
+                  <span>2 hrs</span>
+                  <span>5 hrs</span>
+                  <span>8 hrs</span>
+                </div>
+              </div>
+
+              <!-- Guests Range Slider -->
+              <div class="glass-card p-3.5 sm:p-4 rounded-xl border border-white/5">
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-xs font-bold text-gray-300 uppercase tracking-wider">Expected Crowd Size</label>
+                  <span id="guestsDisplay" class="font-mono text-sm font-bold text-brand-pink">150 Guests</span>
+                </div>
+                <input type="range" id="guestsInput" min="50" max="800" value="150" step="25" class="w-full accent-brand-pink cursor-pointer" oninput="updateSliderDisplays()">
+                <div class="flex justify-between text-[10px] text-gray-400 mt-1.5 font-mono">
+                  <span>50</span>
+                  <span>400</span>
+                  <span>800+</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Add-ons Checkboxes -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2.5">
+                Equipment &amp; Setup Options
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+                <label class="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-white/10 glass-card cursor-pointer hover:border-white/30 transition">
+                  <input type="checkbox" id="addSound" checked class="w-4 h-4 rounded accent-brand-yellow">
+                  <div>
+                    <span class="font-bold text-white block">Full Sound System</span>
+                    <span class="text-[11px] text-gray-400">JBL / RCF Tops + Deep Subwoofers</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-white/10 glass-card cursor-pointer hover:border-white/30 transition">
+                  <input type="checkbox" id="addLights" checked class="w-4 h-4 rounded accent-brand-pink">
+                  <div>
+                    <span class="font-bold text-white block">Club Moving Lights</span>
+                    <span class="text-[11px] text-gray-400">Sharpy / Lasers + Strobes</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-white/10 glass-card cursor-pointer hover:border-white/30 transition">
+                  <input type="checkbox" id="addSmoke" class="w-4 h-4 rounded accent-brand-cyan">
+                  <div>
+                    <span class="font-bold text-white block">Smoke &amp; Haze FX</span>
+                    <span class="text-[11px] text-gray-400">High-density fog atmosphere</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-white/10 glass-card cursor-pointer hover:border-white/30 transition">
+                  <input type="checkbox" id="addMics" checked class="w-4 h-4 rounded accent-purple-400">
+                  <div>
+                    <span class="font-bold text-white block">Dual Cordless Mics</span>
+                    <span class="text-[11px] text-gray-400">Professional wireless microphones</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Contact & Event Details Inputs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Your Name</label>
+                <input type="text" id="clientName" placeholder="e.g. Rahul Sharma" class="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-black/50 border border-white/15 focus:border-brand-yellow focus:outline-none text-xs sm:text-sm text-white placeholder-gray-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Event Date</label>
+                <input type="date" id="eventDate" class="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-black/50 border border-white/15 focus:border-brand-yellow focus:outline-none text-xs sm:text-sm text-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Venue / City</label>
+                <input type="text" id="eventCity" placeholder="e.g. Chennai, Bangalore, Vellore" class="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-black/50 border border-white/15 focus:border-brand-yellow focus:outline-none text-xs sm:text-sm text-white placeholder-gray-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Your Phone / WhatsApp</label>
+                <input type="tel" id="clientPhone" placeholder="+91 Your number" class="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-black/50 border border-white/15 focus:border-brand-yellow focus:outline-none text-xs sm:text-sm text-white placeholder-gray-500">
+              </div>
+            </div>
+
+            <!-- Big Action Submit Button -->
+            <button type="submit" class="w-full py-3.5 sm:py-4 px-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wide bg-brand-yellow text-brand-dark hover:bg-yellow-300 transition-all shadow-neon-yellow flex items-center justify-center gap-2 btn-shimmer">
+              <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> <span>Send Booking Request via WhatsApp</span>
+            </button>
+
+          </form>
+
+          <!-- Direct Line Quick Contact & Guarantees Strip -->
+          <div class="mt-8 pt-8 border-t border-white/10 space-y-4 relative z-10">
+            
+            <!-- Prefer to Call Directly Dedicated Full-Width Card -->
+            <div class="p-3.5 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-brand-yellow/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3.5 sm:gap-4">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-brand-pink/15 border border-brand-pink/30 flex items-center justify-center text-brand-pink shrink-0">
+                  <i class="fa-solid fa-phone-volume text-base sm:text-lg animate-pulse"></i>
+                </div>
+                <div>
+                  <div class="text-xs sm:text-sm font-bold text-white tracking-wide">Prefer to Call Directly?</div>
+                  <div class="text-[11px] sm:text-xs text-gray-400">Available on both visiting card lines for instant date check &amp; booking</div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 w-full md:w-auto shrink-0">
+                <a href="tel:+917358830098" class="whitespace-nowrap px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-white/10 hover:bg-brand-yellow hover:text-black font-bold text-xs tracking-wider transition-all border border-white/10 hover:border-brand-yellow flex items-center justify-center gap-2 group shadow-sm">
+                  <i class="fa-solid fa-phone text-brand-yellow group-hover:text-black transition"></i>
+                  <span>+91 73588 30098</span>
+                </a>
+                <a href="tel:+916382178394" class="whitespace-nowrap px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-white/10 hover:bg-brand-yellow hover:text-black font-bold text-xs tracking-wider transition-all border border-white/10 hover:border-brand-yellow flex items-center justify-center gap-2 group shadow-sm">
+                  <i class="fa-solid fa-phone text-brand-yellow group-hover:text-black transition"></i>
+                  <span>+91 63821 78394</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Event Assurances Strip -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 text-center">
+              <div class="p-2.5 sm:p-3 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center">
+                <div class="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-compact-disc text-brand-yellow text-xs"></i> Full Backup Rig
+                </div>
+                <div class="text-[9px] sm:text-[10px] text-gray-400 mt-0.5">Zero downtime guarantee</div>
+              </div>
+              <div class="p-2.5 sm:p-3 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center">
+                <div class="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-clock text-brand-pink text-xs"></i> Always On Time
+                </div>
+                <div class="text-[9px] sm:text-[10px] text-gray-400 mt-0.5">Early venue soundcheck</div>
+              </div>
+              <div class="p-2.5 sm:p-3 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center">
+                <div class="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-music text-brand-cyan text-xs"></i> Custom Playlist
+                </div>
+                <div class="text-[9px] sm:text-[10px] text-gray-400 mt-0.5">Curated to your crowd</div>
+              </div>
+              <div class="p-2.5 sm:p-3 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center">
+                <div class="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-shield-halved text-emerald-400 text-xs"></i> Crystal Audio
+                </div>
+                <div class="text-[9px] sm:text-[10px] text-gray-400 mt-0.5">Pro wireless microphones</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT & BRAND PHILOSOPHY ==================== -->
+    <section id="about" class="py-16 sm:py-20 relative border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- Left Visual Graphic Block -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden border border-brand-yellow/30 glass-card p-4 sm:p-6 shadow-2xl">
+              <div class="w-full aspect-square rounded-2xl bg-gradient-to-br from-brand-card via-[#16192a] to-black p-3.5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-brand-yellow/20 blur-2xl"></div>
+                
+                <div class="flex items-center justify-between text-xs text-brand-yellow font-mono">
+                  <span>UNIT: DJ-JOHN-MK1</span>
+                  <span class="flex items-center gap-1 text-emerald-400">
+                    <i class="fa-solid fa-circle text-[8px]"></i> 126 BPM SYNC
+                  </span>
+                </div>
+
+                <!-- Vinyl Turntable graphic with smooth spinning animation -->
+                <div class="relative w-40 h-40 xs:w-48 xs:h-48 sm:w-56 sm:h-56 mx-auto rounded-full bg-gradient-to-tr from-neutral-900 via-neutral-800 to-neutral-950 border-4 border-neutral-700/60 shadow-2xl flex items-center justify-center animate-spin" style="animation-duration: 9s;">
+                  <div class="w-32 h-32 xs:w-36 xs:h-36 sm:w-44 sm:h-44 rounded-full border border-neutral-600/40 flex items-center justify-center">
+                    <div class="w-24 h-24 xs:w-28 xs:h-28 sm:w-32 sm:h-32 rounded-full border border-neutral-600/30 flex items-center justify-center">
+                      <div class="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 rounded-full bg-brand-yellow flex flex-col items-center justify-center text-brand-dark p-1 sm:p-2 text-center shadow-lg">
+                        <span class="font-syne font-black text-[10px] sm:text-xs">DJ JOHN</span>
+                        <span class="text-[7px] sm:text-[8px] font-bold">LIVE &amp; LOCAL</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Animated Equalizer Bars -->
+                <div class="flex items-end justify-between h-8 px-2 gap-1.5">
+                  <span class="w-full bg-brand-pink rounded-t animate-eq-1"></span>
+                  <span class="w-full bg-brand-yellow rounded-t animate-eq-2"></span>
+                  <span class="w-full bg-brand-cyan rounded-t animate-eq-3"></span>
+                  <span class="w-full bg-brand-yellow rounded-t animate-eq-4"></span>
+                  <span class="w-full bg-brand-pink rounded-t animate-eq-2"></span>
+                  <span class="w-full bg-brand-cyan rounded-t animate-eq-1"></span>
+                  <span class="w-full bg-brand-yellow rounded-t animate-eq-3"></span>
+                  <span class="w-full bg-brand-pink rounded-t animate-eq-4"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Content Info -->
+          <div class="lg:col-span-7 space-y-5 sm:space-y-6">
+            <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-pink uppercase tracking-widest font-mono">
+              <i class="fa-solid fa-bolt"></i> The DJ Profile
+            </div>
+            
+            <h2 class="font-syne text-2xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              Known For <span class="text-brand-yellow text-glow-yellow">Unstoppable Dancefloors</span> &amp; Local Vibes.
+            </h2>
+            
+            <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+              True to the visiting card motto <strong class="text-brand-yellow">"Live &amp; Local"</strong>, DJ John knows how to read any room—blending regional local chartbusters seamlessly with high-octane commercial EDM, Bollywood bangers, and classic party anthems.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 pt-2">
+              <div class="glass-card p-3 sm:p-4 rounded-xl border border-white/5">
+                <div class="font-syne text-2xl sm:text-3xl font-extrabold text-brand-yellow">500+</div>
+                <div class="text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-semibold">Events Powered</div>
+              </div>
+              <div class="glass-card p-3 sm:p-4 rounded-xl border border-white/5">
+                <div class="font-syne text-2xl sm:text-3xl font-extrabold text-brand-pink">100%</div>
+                <div class="text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-semibold">Live Transitions</div>
+              </div>
+              <div class="glass-card p-3 sm:p-4 rounded-xl border border-white/5 col-span-2 sm:col-span-1">
+                <div class="font-syne text-2xl sm:text-3xl font-extrabold text-brand-cyan">PRO</div>
+                <div class="text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-semibold">Full Audio Console</div>
+              </div>
+            </div>
+
+            <div class="pt-2 flex flex-wrap gap-2 sm:gap-3">
+              <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] sm:text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-check text-brand-yellow"></i> Custom Couple Entry Playlists
+              </span>
+              <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] sm:text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-check text-brand-yellow"></i> High-End Cordless Microphones
+              </span>
+              <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] sm:text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-check text-brand-yellow"></i> Zero Awkward Pauses
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DIRECT CONTACT & BOOKING ==================== -->
+    <section id="contact" class="py-16 sm:py-20 relative border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Parent Card Container -->
+        <div class="glass-card rounded-3xl p-4 sm:p-8 md:p-12 border border-white/10 relative shadow-2xl overflow-hidden">
+          
+          <!-- Background Glow Blobs -->
+          <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-brand-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -top-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- Section Header (Centered, Clean, Prominent) -->
+          <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-brand-yellow uppercase tracking-widest font-mono mb-3 sm:mb-4">
+              <i class="fa-solid fa-phone-volume text-brand-pink"></i> Direct Line Access
+            </div>
+            
+            <h2 class="font-syne text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+              Lock In Your Date With <span class="text-brand-yellow text-glow-yellow">DJ JOHN</span>
+            </h2>
+            
+            <p class="text-gray-300 text-xs sm:text-base mt-2 sm:mt-3 leading-relaxed">
+              Wedding and weekend slots fill up weeks ahead. Connect directly to check date availability, confirm equipment riders, and plan your custom party playlist.
+            </p>
+          </div>
+
+          <!-- Featured Primary WhatsApp Hotline Banner (Full Width, Generous Room) -->
+          <div class="mb-6 relative z-10">
+            <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20want%20to%20inquire%20about%20booking%20you%20for%20an%20event!" target="_blank" rel="noopener noreferrer" class="group relative block p-4 sm:p-7 md:p-8 rounded-2xl bg-gradient-to-r from-[#0a2f1d] via-[#0d3b24] to-[#0a2f1d] border-2 border-emerald-500/40 hover:border-emerald-400 shadow-[0_0_30px_rgba(37,211,102,0.15)] hover:shadow-[0_0_40px_rgba(37,211,102,0.35)] transition-all duration-300">
+              
+              <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5">
+                
+                <!-- Icon + Info -->
+                <div class="flex items-center gap-3.5 sm:gap-5 min-w-0">
+                  <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#25D366] text-black flex items-center justify-center text-2xl sm:text-4xl shadow-[0_0_20px_rgba(37,211,102,0.5)] group-hover:scale-105 transition-transform shrink-0">
+                    <i class="fa-brands fa-whatsapp text-white"></i>
+                  </div>
+                  
+                  <div class="min-w-0">
+                    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                      <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-bold text-emerald-400 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        Official WhatsApp Hotline
+                      </span>
+                      <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] sm:text-[10px] font-bold">Fastest Response</span>
+                    </div>
+                    
+                    <div class="text-xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight group-hover:text-emerald-300 transition-colors whitespace-nowrap font-body">
+                      +91 73588 30098
+                    </div>
+                    
+                    <div class="text-[11px] sm:text-xs text-gray-300 mt-0.5 truncate sm:whitespace-normal">
+                      Instant chat for date availability, DJ sound packages &amp; custom mixes
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Button Pill -->
+                <div class="shrink-0 w-full md:w-auto mt-2 md:mt-0">
+                  <div class="w-full md:w-auto px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl bg-[#25D366] group-hover:bg-[#20ba5a] text-black font-extrabold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+                    <span>Chat on WhatsApp</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                  </div>
+                </div>
+
+              </div>
+            </a>
+          </div>
+
+          <!-- Secondary Channels Grid: 3 Clean, Well-Spaced Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 relative z-10">
+            
+            <!-- Calling Line 2 -->
+            <a href="tel:+916382178394" class="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-brand-yellow/40 hover:bg-white/[0.07] transition-all group block">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center text-sm group-hover:scale-105 transition-transform shrink-0">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-400 font-mono uppercase font-bold">Calling Line 2</div>
+                  <div class="text-[11px] sm:text-xs text-brand-yellow font-semibold">Direct Voice Line</div>
+                </div>
+              </div>
+              <div class="text-sm sm:text-base md:text-lg font-bold text-white group-hover:text-brand-yellow transition whitespace-nowrap font-body">
+                +91 63821 78394
+              </div>
+              <div class="text-[10px] sm:text-[11px] text-gray-400 mt-1">Tap to call directly</div>
+            </a>
+
+            <!-- Official Email -->
+            <a href="mailto:djohn28@gmail.com" class="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-red-400/40 hover:bg-white/[0.07] transition-all group block">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-500/15 text-red-400 flex items-center justify-center text-sm group-hover:scale-105 transition-transform shrink-0">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-400 font-mono uppercase font-bold">Official Email</div>
+                  <div class="text-[11px] sm:text-xs text-red-400 font-semibold">Event Inquiries</div>
+                </div>
+              </div>
+              <div class="text-sm sm:text-base md:text-lg font-bold text-white group-hover:text-red-300 transition truncate font-body">
+                djohn28@gmail.com
+              </div>
+              <div class="text-[10px] sm:text-[11px] text-gray-400 mt-1">Send event brief</div>
+            </a>
+
+            <!-- Coverage Area -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-sm shrink-0">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-400 font-mono uppercase font-bold">Coverage</div>
+                  <div class="text-[11px] sm:text-xs text-purple-400 font-semibold">Performance Radius</div>
+                </div>
+              </div>
+              <div class="text-sm sm:text-base md:text-lg font-bold text-white whitespace-nowrap font-body truncate">
+                Tamil Nadu &amp; Destination
+              </div>
+              <div class="text-[10px] sm:text-[11px] text-gray-400 mt-1">Weddings, Clubs &amp; Bashes</div>
+            </div>
+
+          </div>
+
+          <!-- Direct Booking Guarantees Strip (Bottom of Card, Fully Contained) -->
+          <div class="pt-5 sm:pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-3 text-[11px] sm:text-xs text-gray-300 relative z-10 text-center">
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <i class="fa-solid fa-circle-check text-emerald-400"></i>
+              <span>Fastest responses on WhatsApp</span>
+            </div>
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <i class="fa-solid fa-circle-check text-brand-yellow"></i>
+              <span>Direct artist booking — zero markups</span>
+            </div>
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <i class="fa-solid fa-circle-check text-brand-pink"></i>
+              <span>Custom playlist consultation for all rituals</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-brand-dark py-10 sm:py-12 mb-16 md:mb-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-brand-yellow flex items-center justify-center text-brand-dark font-black font-syne text-sm">
+            DJ
+          </div>
+          <div>
+            <div class="font-syne font-extrabold text-white text-base">DJ JOHN</div>
+            <div class="text-[10px] text-brand-pink font-bold uppercase tracking-widest font-mono">Live &amp; Local Entertainer</div>
+          </div>
+        </div>
+
+        <div class="text-center text-xs text-gray-400 font-mono">
+          Wedding Reception • Birthdays • Parties • Celebrations
+        </div>
+
+        <div class="text-xs text-gray-500 font-mono text-center md:text-right">
+          &copy; <span id="currentYear"></span> DJ John. All rights reserved.
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== DESKTOP FLOATING WHATSAPP BUTTON ==================== -->
+  <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20am%20looking%20to%20book%20a%20DJ%20for%20my%20event!" target="_blank" rel="noopener noreferrer" class="hidden md:flex fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 text-white items-center justify-center text-2xl shadow-lg hover:bg-emerald-400 hover:scale-110 transition-all duration-300 group" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="absolute right-16 bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap shadow-xl">
+      Chat with DJ John
+    </span>
+  </a>
+
+  <!-- ==================== MOBILE BOTTOM QUICK-ACTION DOCK ==================== -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden mobile-action-bar px-3 py-2 flex items-center gap-2.5">
+    <a href="tel:+917358830098" class="flex-1 py-2.5 px-2 rounded-xl bg-white/10 border border-white/15 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition whitespace-nowrap">
+      <i class="fa-solid fa-phone text-brand-yellow text-xs"></i> <span>Call DJ John</span>
+    </a>
+    <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20am%20interested%20in%20booking%20you%20for%20an%20event!" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-2 rounded-xl bg-brand-yellow text-brand-dark font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition whitespace-nowrap shadow-neon-yellow">
+      <i class="fa-brands fa-whatsapp text-sm"></i> <span>WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- ==================== MEDIA LIGHTBOX MODAL ==================== -->
+  <div id="mediaModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl items-center justify-center p-4">
+    <div id="mediaModalContent" class="w-full flex items-center justify-center"></div>
+  </div>
+
+  <!-- ==================== INLINE JAVASCRIPT & GALLERY ENGINE ==================== -->
+  <script>
+    // Dynamic Year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Mobile Drawer Navigation Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (mobileMenu.classList.contains('hidden')) {
+        menuIcon.className = 'fa-solid fa-bars text-xl';
+      } else {
+        menuIcon.className = 'fa-solid fa-xmark text-xl text-brand-yellow';
+      }
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.className = 'fa-solid fa-bars text-xl';
+      });
+    });
+
+    // Header Scroll Elevation
+    const mainHeader = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        mainHeader.classList.add('shadow-2xl', 'bg-brand-dark/95', 'backdrop-blur-xl');
+      } else {
+        mainHeader.classList.remove('shadow-2xl', 'bg-brand-dark/95', 'backdrop-blur-xl');
+      }
+    });
+
+    // Slider displays update
+    function updateSliderDisplays() {
+      const hoursInput = document.getElementById('hoursInput');
+      const guestsInput = document.getElementById('guestsInput');
+
+      const hours = hoursInput ? hoursInput.value : '4';
+      const guests = guestsInput ? guestsInput.value : '150';
+
+      const hoursDisp = document.getElementById('hoursDisplay');
+      if (hoursDisp) hoursDisp.textContent = `${hours} Hours`;
+
+      const guestsDisp = document.getElementById('guestsDisplay');
+      if (guestsDisp) guestsDisp.textContent = `${guests} Guests`;
+    }
+
+    window.prefillBooking = function(serviceName) {
+      const radio = document.querySelector(`input[name="eventType"][value*="${serviceName.split(' ')[0]}"]`);
+      if (radio) {
+        radio.checked = true;
+      }
+      const calcSection = document.getElementById('calculator');
+      if (calcSection) {
+        calcSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    function sendQuoteWhatsApp() {
+      const eventTypeEl = document.querySelector('input[name="eventType"]:checked');
+      const eventType = eventTypeEl ? eventTypeEl.value : 'Wedding Reception';
+
+      const hours = document.getElementById('hoursInput') ? document.getElementById('hoursInput').value : '4';
+      const guests = document.getElementById('guestsInput') ? document.getElementById('guestsInput').value : '150';
+
+      const clientNameInput = document.getElementById('clientName');
+      const clientName = (clientNameInput && clientNameInput.value.trim()) || 'Not specified';
+
+      const eventDateInput = document.getElementById('eventDate');
+      const eventDate = (eventDateInput && eventDateInput.value) || 'To be finalized';
+
+      const eventCityInput = document.getElementById('eventCity');
+      const eventCity = (eventCityInput && eventCityInput.value.trim()) || 'Local Area';
+
+      const clientPhoneInput = document.getElementById('clientPhone');
+      const clientPhone = (clientPhoneInput && clientPhoneInput.value.trim()) || 'Not specified';
+
+      // Equipment checkboxes
+      const addSound = document.getElementById('addSound') ? document.getElementById('addSound').checked : true;
+      const addLights = document.getElementById('addLights') ? document.getElementById('addLights').checked : true;
+      const addSmoke = document.getElementById('addSmoke') ? document.getElementById('addSmoke').checked : false;
+      const addMics = document.getElementById('addMics') ? document.getElementById('addMics').checked : true;
+
+      const gearList = [];
+      if (addSound) gearList.push('Full Sound System');
+      if (addLights) gearList.push('Club Moving Lights');
+      if (addSmoke) gearList.push('Haze & Smoke FX');
+      if (addMics) gearList.push('Dual Cordless Mics');
+      const gear = gearList.length > 0 ? gearList.join(' + ') : 'DJ Console Only';
+
+      // Clean plain-text formatted message for WhatsApp without rendering issues
+      const messageLines = [
+        `*DJ JOHN | LIVE & LOCAL*`,
+        `*EVENT BOOKING INQUIRY*`,
+        `---------------------------------------`,
+        `*Name:* ${clientName}`,
+        `*Contact:* ${clientPhone}`,
+        `*Occasion:* ${eventType}`,
+        `*Date:* ${eventDate}`,
+        `*Venue/City:* ${eventCity}`,
+        `*Duration:* ${hours} Hours`,
+        `*Crowd Size:* ${guests} Guests`,
+        `*Equipment Needed:* ${gear}`,
+        `---------------------------------------`,
+        `Hi DJ John, please let me know your availability and package details for this event!`
+      ];
+
+      const fullMessage = messageLines.join('\n');
+      const waUrl = `https://wa.me/917358830098?text=${encodeURIComponent(fullMessage)}`;
+
+      window.open(waUrl, '_blank');
+    }
+
+    /* ==========================================================
+       MEDIA GALLERY ENGINE & INLINE MANIFEST
+    ========================================================== */
+    const SAMPLE_GALLERY = [
+      {
+        id: 'sample-video-1',
+        type: 'video',
+        title: 'High-Voltage Wedding Couple Entry & Confetti Drop',
+        category: 'wedding',
+        src: 'https://assets.mixkit.co/videos/preview/mixkit-dj-mixing-music-at-a-party-41710-large.mp4',
+        poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
+        caption: 'Cinematic cold pyros, smoke haze, and custom couple entry track blast.'
+      },
+      {
+        id: 'sample-photo-1',
+        type: 'photo',
+        title: 'Grand Wedding Sangeet Dancefloor in Full Surge',
+        category: 'wedding',
+        src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+        caption: '150+ guests on the floor with synchronized Sharpy moving heads and regional beats.'
+      },
+      {
+        id: 'sample-video-2',
+        type: 'video',
+        title: 'Nightclub & Farmhouse Party Heavy Bass Drop',
+        category: 'parties',
+        src: 'https://assets.mixkit.co/videos/preview/mixkit-crowd-jumping-at-a-nightclub-concert-41716-large.mp4',
+        poster: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
+        caption: 'Heavy 808 sub drops and laser lighting keeping energy at peak levels.'
+      },
+      {
+        id: 'sample-photo-2',
+        type: 'photo',
+        title: 'DJ John Live Console & Stage Lighting Setup',
+        category: 'parties',
+        src: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=1200&q=80',
+        caption: 'Professional Pioneer DJ setup with JBL PRX sound reinforcement.'
+      },
+      {
+        id: 'sample-photo-3',
+        type: 'photo',
+        title: 'Milestone 21st Birthday Cake Cutting & Hype Fanfare',
+        category: 'birthday',
+        src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80',
+        caption: 'Exclusive birthday anthem fanfare and countdown drop.'
+      },
+      {
+        id: 'sample-photo-4',
+        type: 'photo',
+        title: 'Mega Anniversary & Corporate Annual Gala',
+        category: 'celebrations',
+        src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80',
+        caption: 'Sophisticated dinner ambience transitioning into full-energy dance session.'
+      }
+    ];
+
+    let activeFilter = 'all';
+    let galleryItems = [];
+
+    function loadAllMedia() {
+      galleryItems = [...SAMPLE_GALLERY];
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      if (!grid) return;
+      loadAllMedia();
+
+      const filtered = galleryItems.filter((item) => {
+        if (activeFilter === 'all') return true;
+        if (activeFilter === 'video') return item.type === 'video';
+        return item.category === activeFilter;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center glass-card rounded-3xl border border-white/10 p-8">
+            <i class="fa-solid fa-photo-film text-4xl text-gray-500 mb-3 block"></i>
+            <p class="text-gray-300 font-syne font-bold text-lg">No media found in this category.</p>
+            <p class="text-gray-400 text-xs mt-1">Check back soon for more live event highlights!</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item) => {
+        const isVideo = item.type === 'video';
+        const badgeColor =
+          item.category === 'wedding'
+            ? 'bg-brand-pink/20 text-brand-pink border-brand-pink/30'
+            : item.category === 'birthday'
+            ? 'bg-brand-yellow/20 text-brand-yellow border-brand-yellow/30'
+            : item.category === 'parties'
+            ? 'bg-brand-cyan/20 text-brand-cyan border-brand-cyan/30'
+            : 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+
+        const categoryLabel =
+          item.category === 'wedding'
+            ? 'Wedding'
+            : item.category === 'birthday'
+            ? 'Birthday'
+            : item.category === 'parties'
+            ? 'Club & Party'
+            : 'Celebration';
+
+        return `
+          <div class="glass-card glass-card-hover rounded-2xl overflow-hidden border border-white/10 flex flex-col group cursor-pointer transition-all duration-300" onclick="openMediaModal('${item.id}')">
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-black/60 flex items-center justify-center">
+              ${
+                isVideo
+                  ? `
+                  <img src="${item.poster || item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80'">
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+                    <div class="w-13 h-13 rounded-full bg-brand-yellow text-brand-dark flex items-center justify-center text-lg pl-1 shadow-neon-yellow group-hover:scale-110 transition-transform">
+                      <i class="fa-solid fa-play"></i>
+                    </div>
+                  </div>
+                  <span class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/80 border border-white/20 text-[10px] font-mono font-bold text-white flex items-center gap-1">
+                    <i class="fa-solid fa-video text-brand-pink"></i> VIDEO CLIP
+                  </span>
+                  `
+                  : `
+                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80'">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-xs text-brand-yellow font-bold flex items-center gap-1.5">
+                      <i class="fa-solid fa-expand"></i> View Fullscreen
+                    </span>
+                  </div>
+                  `
+              }
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border backdrop-blur-md ${badgeColor}">
+                ${categoryLabel}
+              </span>
+            </div>
+
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="font-syne font-bold text-white text-base group-hover:text-brand-yellow transition-colors line-clamp-1">
+                  ${item.title}
+                </h4>
+                <p class="text-gray-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+                  ${item.caption || 'Live celebration powered by DJ John.'}
+                </p>
+              </div>
+
+              <div class="pt-3 mt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400 font-mono">
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid ${isVideo ? 'fa-film text-brand-pink' : 'fa-camera text-brand-yellow'}"></i>
+                  ${isVideo ? 'Live Video' : 'Event Photo'}
+                </span>
+                <span class="text-brand-yellow font-bold group-hover:translate-x-1 transition-transform">
+                  View <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setGalleryFilter(filterName) {
+      activeFilter = filterName;
+      document.querySelectorAll('.gallery-filter-btn').forEach((btn) => {
+        const btnFilter = btn.getAttribute('data-filter');
+        if (btnFilter === filterName) {
+          btn.className = 'gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-brand-yellow text-brand-dark shadow-neon-yellow transition active:scale-95';
+        } else {
+          btn.className = 'gallery-filter-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider glass-card text-gray-300 hover:text-white hover:border-white/20 transition active:scale-95';
+        }
+      });
+      renderGallery();
+    }
+
+    function openMediaModal(itemId) {
+      const item = galleryItems.find((i) => i.id === itemId);
+      if (!item) return;
+
+      const modal = document.getElementById('mediaModal');
+      const content = document.getElementById('mediaModalContent');
+      if (!modal || !content) return;
+
+      const isVideo = item.type === 'video';
+
+      content.innerHTML = `
+        <div class="relative w-full max-w-4xl bg-brand-card rounded-3xl border border-white/15 overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+          <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-black/60">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full ${isVideo ? 'bg-brand-pink' : 'bg-brand-yellow'} animate-pulse"></span>
+              <h3 class="font-syne font-bold text-white text-base sm:text-lg line-clamp-1">${item.title}</h3>
+            </div>
+            <button onclick="closeMediaModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-gray-200 flex items-center justify-center transition">
+              <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+          </div>
+
+          <div class="flex-1 bg-black flex items-center justify-center overflow-hidden relative min-h-[300px]">
+            ${
+              isVideo
+                ? `
+                <video src="${item.src}" controls autoplay playsinline class="w-full max-h-[65vh] object-contain" poster="${item.poster || ''}">
+                  Your browser does not support HTML5 video.
+                </video>
+                `
+                : `
+                <img src="${item.src}" alt="${item.title}" class="w-full max-h-[65vh] object-contain">
+                `
+            }
+          </div>
+
+          <div class="p-4 sm:p-5 border-t border-white/10 bg-[#0d0f19] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+            <p class="text-gray-300 leading-relaxed max-w-2xl">${item.caption || 'Event powered by DJ John'}</p>
+            <a href="https://wa.me/917358830098?text=Hi%20DJ%20John,%20I%20saw%20your%20event%20sample%20('${encodeURIComponent(item.title)}')%20and%20would%20like%20similar%20sound%20and%20setup!" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-4 py-2 rounded-xl bg-brand-yellow text-brand-dark font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-neon-yellow hover:bg-yellow-300 transition">
+              <i class="fa-brands fa-whatsapp text-sm"></i> Inquire About This Setup
+            </a>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMediaModal() {
+      const modal = document.getElementById('mediaModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      const video = modal.querySelector('video');
+      if (video) video.pause();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMediaModal();
+      }
+    });
+
+    updateSliderDisplays();
+    renderGallery();
+  </script>
+</body>
+</html>
