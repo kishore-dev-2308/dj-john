@@ -53,6 +53,12 @@ d:/Tasks/dj-john/
 └── assets/
     ├── css/
     │   └── style.css        # Custom keyframe animations, marquee, glassmorphism & mobile styles
+    ├── fonts/
+    │   ├── fonts.css        # Local Google Fonts definitions (Plus Jakarta Sans, Syne, JetBrains Mono)
+    │   └── *.woff2          # Downloaded local font binary files
+    ├── vendor/
+    │   ├── fontawesome/     # Local Font Awesome 6.5.1 CSS & Webfonts
+    │   └── tailwind/        # Local Tailwind CSS engine
     ├── js/
     │   ├── calculator.js    # Event planner & WhatsApp URL builder
     │   ├── gallery.js       # Dynamic filterable photo & video gallery engine
