@@ -73,7 +73,7 @@
               ${
                 isVideo
                   ? `
-                  <img src="${item.poster || item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80'">
+                  <img src="${item.poster || item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='./assets/media/photos/club-party-bass.jpg'">
                   <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                     <div class="w-13 h-13 rounded-full bg-brand-yellow text-brand-dark flex items-center justify-center text-lg pl-1 shadow-neon-yellow group-hover:scale-110 transition-transform">
                       <i class="fa-solid fa-play"></i>
@@ -84,7 +84,7 @@
                   </span>
                   `
                   : `
-                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80'">
+                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='./assets/media/photos/wedding-pyros-entry.jpg'">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span class="text-xs text-brand-yellow font-bold flex items-center gap-1.5">
                       <i class="fa-solid fa-expand"></i> View Fullscreen

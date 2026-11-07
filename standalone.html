@@ -8,14 +8,14 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
 
-  <!-- Google Fonts & Font Awesome Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Local Google Fonts (Plus Jakarta Sans, Syne, JetBrains Mono) -->
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+
+  <!-- Local Font Awesome 6.5.1 Icons & Webfonts -->
+  <link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css">
   
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Local Tailwind CSS -->
+  <script src="./assets/vendor/tailwind/tailwind.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -1155,8 +1155,8 @@
         type: 'video',
         title: 'High-Voltage Wedding Couple Entry & Confetti Drop',
         category: 'wedding',
-        src: 'https://assets.mixkit.co/videos/preview/mixkit-dj-mixing-music-at-a-party-41710-large.mp4',
-        poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/videos/dj-mixing-live.mp4',
+        poster: './assets/media/photos/wedding-pyros-entry.jpg',
         caption: 'Cinematic cold pyros, smoke haze, and custom couple entry track blast.'
       },
       {
@@ -1164,7 +1164,7 @@
         type: 'photo',
         title: 'Grand Wedding Sangeet Dancefloor in Full Surge',
         category: 'wedding',
-        src: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/photos/wedding-sangeet.jpg',
         caption: '150+ guests on the floor with synchronized Sharpy moving heads and regional beats.'
       },
       {
@@ -1172,8 +1172,8 @@
         type: 'video',
         title: 'Nightclub & Farmhouse Party Heavy Bass Drop',
         category: 'parties',
-        src: 'https://assets.mixkit.co/videos/preview/mixkit-crowd-jumping-at-a-nightclub-concert-41716-large.mp4',
-        poster: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/videos/nightclub-crowd-surge.mp4',
+        poster: './assets/media/photos/club-party-bass.jpg',
         caption: 'Heavy 808 sub drops and laser lighting keeping energy at peak levels.'
       },
       {
@@ -1181,7 +1181,7 @@
         type: 'photo',
         title: 'DJ John Live Console & Stage Lighting Setup',
         category: 'parties',
-        src: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/photos/dj-console-stage.jpg',
         caption: 'Professional Pioneer DJ setup with JBL PRX sound reinforcement.'
       },
       {
@@ -1189,7 +1189,7 @@
         type: 'photo',
         title: 'Milestone 21st Birthday Cake Cutting & Hype Fanfare',
         category: 'birthday',
-        src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/photos/birthday-celebration.jpg',
         caption: 'Exclusive birthday anthem fanfare and countdown drop.'
       },
       {
@@ -1197,7 +1197,7 @@
         type: 'photo',
         title: 'Mega Anniversary & Corporate Annual Gala',
         category: 'celebrations',
-        src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80',
+        src: './assets/media/photos/corporate-gala.jpg',
         caption: 'Sophisticated dinner ambience transitioning into full-energy dance session.'
       }
     ];
@@ -1257,7 +1257,7 @@
               ${
                 isVideo
                   ? `
-                  <img src="${item.poster || item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80'">
+                  <img src="${item.poster || item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='./assets/media/photos/club-party-bass.jpg'">
                   <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                     <div class="w-13 h-13 rounded-full bg-brand-yellow text-brand-dark flex items-center justify-center text-lg pl-1 shadow-neon-yellow group-hover:scale-110 transition-transform">
                       <i class="fa-solid fa-play"></i>
@@ -1268,7 +1268,7 @@
                   </span>
                   `
                   : `
-                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80'">
+                  <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='./assets/media/photos/wedding-pyros-entry.jpg'">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span class="text-xs text-brand-yellow font-bold flex items-center gap-1.5">
                       <i class="fa-solid fa-expand"></i> View Fullscreen
